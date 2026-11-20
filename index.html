@@ -1,0 +1,277 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Portal Kehadiran Anggota — Absensi HAMKA</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="top noprint">
+  <a class="brand" href="#" onclick="nav('home');return false">
+    <img src="hamka.png" alt="HAMKA" onerror="this.style.display='none'">
+    <span><b>Absensi HAMKA</b><small>Portal kehadiran anggota</small></span>
+  </a>
+  <nav id="topnav"></nav>
+</header>
+
+<ol class="steps noprint" id="stepbar" hidden>
+  <li id="st1"><span>01</span>Selamat datang</li>
+  <li id="st2"><span>02</span>Masuk</li>
+  <li id="st3"><span>03</span>Isi absensi</li>
+</ol>
+
+<main>
+  <!-- 1. BERANDA -->
+  <section id="view-home" class="view">
+    <div class="hero">
+      <div>
+        <span class="gold">SELAMAT DATANG DI HAMKA</span>
+        <h1>Setiap kehadiran,<br>bagian dari kontribusi.</h1>
+        <p class="muted" style="max-width:440px">Catat kehadiran kegiatan Anda dengan mudah dan tertib. Masuk, lengkapi formulir, lalu kirim absensi dalam satu alur sederhana.</p>
+        <p><button class="btn" onclick="nav('login')">Mulai absensi</button></p>
+      </div>
+      <div class="hcard">
+        <div class="logo"><img src="hamka.png" alt="HAMKA" onerror="this.alt='HAMKA'"></div>
+        <b>HAMKA</b>
+        <span style="color:#b9c6df;font-size:12px">Kehadiran tercatat.<br>Kontribusi Anda berarti.</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. LOGIN -->
+  <section id="view-login" class="view" hidden>
+    <div class="split">
+      <div class="l">
+        <div class="logo"><img src="hamka.png" alt=""></div>
+        <h2>Selamat datang kembali.</h2>
+        <p>Masuk ke akun Anda untuk mencatat kehadiran kegiatan di HAMKA.</p>
+      </div>
+      <form class="r" id="form-login">
+        <h2>Masuk ke akun Anda</h2>
+        <p class="muted" style="margin:0">Isi NIM atau nama dan password yang terdaftar.</p>
+        <div class="err" id="err-login" hidden></div>
+        <label for="l-id">NIM / Nama</label>
+        <input type="text" id="l-id" required placeholder="Masukkan NIM atau nama">
+        <label for="l-pw">Password</label>
+        <input type="password" id="l-pw" required placeholder="Masukkan password">
+        <p><button class="btn full" style="margin-top:18px">Masuk</button></p>
+        <div class="links">
+          <a href="#" onclick="nav('forgot');return false">Lupa password?</a>
+          <a href="#" onclick="nav('register');return false">Daftar akun</a>
+        </div>
+        <p class="muted" style="font-size:11px;margin-top:14px">Akun Admin Utama: <b>sekum1</b> / <b>Sekum#123</b></p>
+      </form>
+    </div>
+  </section>
+
+  <!-- 3. REGISTER -->
+  <section id="view-register" class="view" hidden>
+    <div class="split">
+      <div class="l">
+        <div class="logo"><img src="hamka.png" alt=""></div>
+        <h2>Buat akun baru.</h2>
+        <p>Daftar sekali, lalu catat kehadiran kapan saja.</p>
+      </div>
+      <form class="r" id="form-register">
+        <h2>Daftar</h2>
+        <div class="err" id="err-reg" hidden></div>
+        <label>Nama</label><input type="text" id="r-nama" required>
+        <label>NIM</label><input type="text" id="r-nim" required>
+        <label>No. telepon</label><input type="tel" id="r-tel" required>
+        <label>Password</label><input type="password" id="r-pw" required>
+        <label>Konfirmasi password</label><input type="password" id="r-pw2" required>
+        <p><button class="btn full" style="margin-top:18px">Daftar</button></p>
+        <div class="links">
+          <a href="#" onclick="nav('login');return false">Sudah punya akun? Masuk</a>
+          <a href="#" onclick="nav('forgot');return false">Lupa password?</a>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <!-- 4. FORGOT PASSWORD -->
+  <section id="view-forgot" class="view" hidden>
+    <div class="split">
+      <div class="l">
+        <div class="logo"><img src="hamka.png" alt=""></div>
+        <h2>Atur ulang password.</h2>
+        <p>Masukkan nomor telepon yang terdaftar, lalu buat password baru.</p>
+      </div>
+      <form class="r" id="form-forgot">
+        <h2>Lupa password</h2>
+        <div class="err" id="err-fg" hidden></div>
+        <div class="okb" id="ok-fg" hidden></div>
+        <label>No. telepon terdaftar</label><input type="tel" id="f-tel" required>
+        <label>NIM / Nama</label><input type="text" id="f-id" required>
+        <label>Password baru</label><input type="password" id="f-pw" required>
+        <label>Konfirmasi password baru</label><input type="password" id="f-pw2" required>
+        <p><button class="btn full" style="margin-top:18px">Ubah password</button></p>
+        <div class="links"><a href="#" onclick="nav('login');return false">Kembali ke masuk</a></div>
+      </form>
+    </div>
+  </section>
+
+  <!-- 5. FORM ABSENSI (USER) -->
+  <section id="view-absen" class="view" hidden>
+    <h2 style="font-size:24px">Formulir absensi</h2>
+    <p class="muted" style="margin:0" id="absen-greet"></p>
+    <div class="err" id="err-absen" hidden></div>
+    <form id="form-absen" class="fgrid">
+      <div class="panel">
+        <h2 style="font-size:15px">Daftar kehadiran</h2>
+        <div class="err" id="sec" hidden>Kamera dan lokasi diblokir browser pada alamat ini. Buka lewat <b>http://localhost</b> (Live Server) atau <b>HTTPS</b>.</div>
+        <div class="row2">
+          <div><label>Nama</label><input type="text" id="a-nama" readonly></div>
+          <div><label>Tanggal</label><input type="text" id="a-tgl" readonly></div>
+        </div>
+        <div class="row2">
+          <div>
+            <label for="a-dep">Departemen</label>
+            <select id="a-dep" required>
+              <option value="">Pilih departemen</option>
+              <option>Departemen Organisasi</option>
+              <option>Departemen Penelitian dan Pengembangan</option>
+              <option>Departemen Eksternal</option>
+              <option>Departemen Komunikasi dan Informasi</option>
+            </select>
+          </div>
+          <div>
+            <label for="a-keg">Nama kegiatan</label>
+            <input type="text" id="a-keg" required maxlength="150" placeholder="Ketik nama kegiatan">
+          </div>
+        </div>
+        <label>Keterangan</label>
+        <div class="radios">
+          <label><input type="radio" name="keterangan" value="Hadir" checked>Hadir</label>
+          <label><input type="radio" name="keterangan" value="Sakit">Sakit</label>
+          <label><input type="radio" name="keterangan" value="Izin">Izin</label>
+        </div>
+        <label>Lokasi Anda saat ini</label>
+        <div class="loc" id="loc">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s7-6.2 7-11.5A7 7 0 0 0 5 9.5C5 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>
+          <div>
+            <b id="locn">Meminta izin lokasi…</b>
+            <small id="loca">Klik <b>Izinkan</b> saat browser menanyakan akses lokasi.</small>
+            <button type="button" class="btn sm" id="bgps" style="margin-top:8px" onclick="getGPS()">Aktifkan lokasi</button>
+          </div>
+        </div>
+        <label>Bukti foto (kamera langsung)</label>
+        <div class="cam">
+          <video id="v" autoplay playsinline muted hidden></video>
+          <img id="shot" alt="" hidden>
+          <button type="button" class="btn sm" id="bcam" onclick="startCam()">Aktifkan kamera</button>
+          <button type="button" class="btn ghost sm" id="snap" disabled>Ambil foto</button>
+          <button type="button" class="btn ghost sm" id="redo" hidden>Ulangi</button>
+          <div class="muted" id="cmsg" style="font-size:11px;margin-top:6px">Klik <b>Izinkan</b> saat browser menanyakan akses kamera. Foto hanya dari kamera langsung.</div>
+        </div>
+        <div class="err" id="miss" hidden></div>
+        <p style="text-align:right"><button class="btn" id="go">Kirim absensi</button></p>
+      </div>
+      <aside>
+        <div class="side">
+          <b style="margin-top:0">Sebelum mengirim</b>
+          <b>Periksa data Anda</b><p>Pastikan nama, departemen, dan tanggal sudah sesuai.</p>
+          <b>Aktifkan GPS dan kamera</b><p>Izinkan akses lokasi dan kamera agar nama tempat dan foto Anda tercatat.</p>
+        </div>
+        <div class="note"><b>Satu kegiatan, satu absensi</b><br>Absensi hanya bisa dikirim sekali untuk setiap kegiatan per hari.</div>
+      </aside>
+    </form>
+  </section>
+
+  <!-- 6. SUKSES ABSEN -->
+  <section id="view-sukses" class="view" hidden>
+    <div class="success">
+      <div class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div>
+      <span class="gold" style="color:var(--ok)">ABSENSI BERHASIL DICATAT</span>
+      <h2 style="font-size:24px;margin-top:6px">Anda sudah absensi</h2>
+      <p class="muted" id="sukses-msg" style="margin-bottom:0"></p>
+      <p style="margin-top:20px"><button class="btn" onclick="nav('riwayat')">Lihat riwayat absensi</button></p>
+    </div>
+  </section>
+
+  <!-- 7. RIWAYAT USER -->
+  <section id="view-riwayat" class="view" hidden>
+    <h2 style="font-size:24px">Riwayat absensi</h2>
+    <p class="muted" style="margin:0">Catatan kehadiran harian Anda.</p>
+    <div class="bar noprint">
+      <div>
+        <label for="filter-user">Filter nama kegiatan</label>
+        <select id="filter-user" onchange="renderRiwayat()"><option value="">Semua kegiatan</option></select>
+      </div>
+      <button class="btn" onclick="window.print()">Cetak / Simpan PDF</button>
+      <button class="btn ghost" onclick="nav('absen')">Absen baru</button>
+    </div>
+    <div class="tw">
+      <table>
+        <thead><tr><th>Tanggal</th><th>Kegiatan</th><th>Departemen</th><th>Keterangan</th><th>Waktu</th><th>Lokasi</th><th>Foto</th><th>Bukti</th></tr></thead>
+        <tbody id="tb-riwayat"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- 8. REKAP ADMIN -->
+  <section id="view-rekap" class="view" hidden>
+    <h2 style="font-size:24px">Rekap absensi</h2>
+    <p class="muted" style="margin:0">Semua anggota yang sudah mengisi absensi tampil di sini.</p>
+    <div class="bar noprint">
+      <div>
+        <label for="filter-admin">Filter nama kegiatan</label>
+        <select id="filter-admin" onchange="renderRekap()"><option value="">Semua kegiatan</option></select>
+      </div>
+      <button class="btn" onclick="window.print()">Cetak / Simpan PDF</button>
+    </div>
+    <div class="stats" id="admin-stats"></div>
+    <div class="tw">
+      <table>
+        <thead><tr><th>Waktu</th><th>Nama</th><th>NIM</th><th>Departemen</th><th>Kegiatan</th><th>Ket.</th><th>Lokasi absen</th><th>Foto</th><th>Bukti</th></tr></thead>
+        <tbody id="tb-rekap"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- 9. KELOLA ADMIN (ADMIN UTAMA) -->
+  <section id="view-admins" class="view" hidden>
+    <h2 style="font-size:24px">Admin</h2>
+    <p class="muted" style="margin:0">Admin utama (sekum1) dapat menambah admin kedua bila dibutuhkan.</p>
+    <div class="err" id="err-adm" hidden></div>
+    <form class="panel" id="form-add-admin" style="margin:16px 0">
+      <div class="row2">
+        <div><label>Nama</label><input type="text" id="ad-nama" required></div>
+        <div><label>Username / NIM</label><input type="text" id="ad-nim" required></div>
+        <div><label>No. telepon</label><input type="tel" id="ad-tel" required></div>
+        <div><label>Password</label><input type="password" id="ad-pw" required></div>
+      </div>
+      <p><button class="btn">Tambah admin kedua</button></p>
+    </form>
+    <div class="tw">
+      <table>
+        <thead><tr><th>Nama</th><th>Username</th><th>Peran</th><th></th></tr></thead>
+        <tbody id="tb-admins"></tbody>
+      </table>
+    </div>
+  </section>
+</main>
+
+<footer class="noprint">© 2026 HAMKA. Seluruh hak cipta dilindungi.</footer>
+
+<!-- MODAL BUKTI ABSENSI (PENGGANTI PDF) -->
+<div id="modal-bukti" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:50;place-items:center;padding:16px">
+  <div style="background:#fff;max-width:480px;width:100%;border-radius:14px;overflow:hidden;box-shadow:0 20px 50px rgba(0,0,0,.25)">
+    <div style="background:var(--navy);color:#fff;padding:20px 24px;display:flex;justify-content:space-between;align-items:center">
+      <div><b style="font-size:18px;display:block">BUKTI ABSENSI</b><small style="color:#b9c6df">HAMKA — Portal Kehadiran Anggota</small></div>
+      <span id="mb-no" style="font-weight:700;font-size:13px"></span>
+    </div>
+    <div style="padding:20px 24px;font-size:13px" id="mb-body"></div>
+    <div style="padding:12px 24px;background:var(--bg);display:flex;justify-content:flex-end;gap:10px" class="noprint">
+      <button class="btn ghost sm" onclick="document.getElementById('modal-bukti').style.display='none'">Tutup</button>
+      <button class="btn sm" onclick="window.print()">Cetak Bukti</button>
+    </div>
+  </div>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
